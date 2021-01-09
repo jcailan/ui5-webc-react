@@ -15,7 +15,7 @@ import {
 	// FlexBoxJustifyContent,
 	// FlexBoxWrap,
 	FlexBoxDirection,
-	// AnalyticalTable,
+	AnalyticalTable,
 	Icon
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
@@ -24,6 +24,7 @@ import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 import "@ui5/webcomponents-icons/dist/add.js";
 import "@ui5/webcomponents-icons/dist/list.js";
+import "@ui5/webcomponents-icons/dist/table-view.js";
 
 export function MyApp() {
 	const [toggleCharts, setToggleCharts] = useState("lineChart");
@@ -47,6 +48,36 @@ export function MyApp() {
 
 	const contentTitle = toggleCharts === 'lineChart' ? 'Line Chart' : 'Bar Chart';
 	const switchToChart = toggleCharts === 'lineChart' ? 'Bar Chart' : 'Line Chart';
+
+	const tableData = new Array(500).fill(null).map((_, index) => {
+		return {
+			name: `name${index}`,
+			age: Math.floor(Math.random() * 100),
+			friend: {
+				name: `friend.Name${index}`,
+				age: Math.floor(Math.random() * 100)
+			}
+		};
+	});
+
+	const tableColumns = [
+		{
+			Header: "Name",
+			accessor: "name" // String-based value accessors!
+		},
+		{
+			Header: "Age",
+			accessor: "age"
+		},
+		{
+			Header: "Friend Name",
+			accessor: "friend.name"
+		},
+		{
+			Header: "Friend Age",
+			accessor: "friend.age"
+		}
+	];
 
 	const dataset = [
 		{
@@ -141,6 +172,12 @@ export function MyApp() {
 						</FlexBox>
 					</StandardListItem>
 				</List>
+			</Card>
+			<Card heading="AnalyticalTable" style={{ maxWidth: "900px" }} avatar={<Icon name="table-view" />}>
+				<AnalyticalTable
+					data={tableData}
+					columns={tableColumns}
+					visibleRows={5} />
 			</Card>
 		</div>
 	);
