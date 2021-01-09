@@ -7,12 +7,21 @@ import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 
 export function MyApp() {
 	const [toggleCharts, setToggleCharts] = useState("lineChart");
+	const [loading, setLoading] = useState(false);
 
 	const handleHeaderClick = () => {
 		if (toggleCharts === "lineChart") {
-			setToggleCharts("barChart");
+			setLoading(true);
+			setTimeout(() => {
+				setLoading(false);
+				setToggleCharts("barChart");
+			}, 2000);
 		} else {
-			setToggleCharts("lineChart");
+			setLoading(true);
+			setTimeout(() => {
+				setLoading(false);
+				setToggleCharts("lineChart");
+			}, 2000);
 		}
 	};
 
@@ -60,12 +69,14 @@ export function MyApp() {
 						dimensions={[{ accessor: "month" }]}
 						measures={[{ accessor: "data", label: "Stock Price" }]}
 						dataset={dataset}
+						loading={loading}
 					/>
 				) : (
 						<BarChart
 							dimensions={[{ accessor: "month" }]}
 							measures={[{ accessor: "data" }]}
 							dataset={dataset}
+							loading={loading}
 						/>
 					)}
 			</Card>
