@@ -8,10 +8,51 @@ export function MyApp() {
 		alert("Header clicked");
 	};
 
+	const dataset = [
+		{
+			month: "January",
+			data: 65
+		},
+		{
+			month: "February",
+			data: 59
+		},
+		{
+			month: "March",
+			data: 80
+		},
+		{
+			month: "April",
+			data: 81
+		},
+		{
+			month: "May",
+			data: 56
+		},
+		{
+			month: "June",
+			data: 55
+		},
+		{
+			month: "July",
+			data: 40
+		}
+	];
+
 	return (
 		<div>
 			<Card heading="Card" style={{ width: "300px" }} headerInteractive onHeaderClick={handleHeaderClick}>
 				<Text style={spacing.sapUiContentPadding}>This is the content area of the Card</Text>
+				<LineChart
+					dimensions={[{ accessor: "month" }]}
+					measures={[{ accessor: "data", label: "Stock Price" }]}
+					dataset={dataset}
+				/>
+				<BarChart
+					dimensions={[{ accessor: "month" }]}
+					measures={[{ accessor: "data", label: "Stock Price" }]}
+					dataset={dataset}
+				/>
 			</Card>
 		</div>
 	);
