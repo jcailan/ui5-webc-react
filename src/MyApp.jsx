@@ -1,11 +1,19 @@
-import React from "react";
-import { Card, Text } from "@ui5/webcomponents-react";
+import React, { useState } from "react";
+import { Card, Text, Icon } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
+import '@ui5/webcomponents-icons/dist/line-chart.js';
+import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 
 export function MyApp() {
+	const [toggleCharts, setToggleCharts] = useState("lineChart");
+
 	const handleHeaderClick = () => {
-		alert("Header clicked");
+		if (toggleCharts === "lineChart") {
+			setToggleCharts("barChart");
+		} else {
+			setToggleCharts("lineChart");
+		}
 	};
 
 	const dataset = [
@@ -41,18 +49,25 @@ export function MyApp() {
 
 	return (
 		<div>
-			<Card heading="Card" style={{ width: "300px" }} headerInteractive onHeaderClick={handleHeaderClick}>
+			<Card
+				avatar={<Icon name={toggleCharts === "lineChart" ? "line-chart" : "horizontal-bar-chart"} />}
+				heading="Card"
+				style={{ width: "300px" }} headerInteractive
+				onHeaderClick={handleHeaderClick}>
 				<Text style={spacing.sapUiContentPadding}>This is the content area of the Card</Text>
-				<LineChart
-					dimensions={[{ accessor: "month" }]}
-					measures={[{ accessor: "data", label: "Stock Price" }]}
-					dataset={dataset}
-				/>
-				<BarChart
-					dimensions={[{ accessor: "month" }]}
-					measures={[{ accessor: "data", label: "Stock Price" }]}
-					dataset={dataset}
-				/>
+				{toggleCharts === "lineChart" ? (
+					<LineChart
+						dimensions={[{ accessor: "month" }]}
+						measures={[{ accessor: "data", label: "Stock Price" }]}
+						dataset={dataset}
+					/>
+				) : (
+						<BarChart
+							dimensions={[{ accessor: "month" }]}
+							measures={[{ accessor: "data" }]}
+							dataset={dataset}
+						/>
+					)}
 			</Card>
 		</div>
 	);
