@@ -5,16 +5,16 @@ import {
 	Text,
 	ShellBar,
 	ShellBarItem,
-	// List,
-	// StandardListItem,
-	// ValueState,
-	// ProgressIndicator,
-	// Title,
-	// TitleLevel,
-	// FlexBox,
+	List,
+	StandardListItem,
+	ValueState,
+	ProgressIndicator,
+	Title,
+	TitleLevel,
+	FlexBox,
 	// FlexBoxJustifyContent,
 	// FlexBoxWrap,
-	// FlexBoxDirection,
+	FlexBoxDirection,
 	// AnalyticalTable,
 	Icon
 } from "@ui5/webcomponents-react";
@@ -23,6 +23,7 @@ import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
 import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 import "@ui5/webcomponents-icons/dist/add.js";
+import "@ui5/webcomponents-icons/dist/list.js";
 
 export function MyApp() {
 	const [toggleCharts, setToggleCharts] = useState("lineChart");
@@ -109,6 +110,37 @@ export function MyApp() {
 							loading={loading}
 						/>
 					)}
+			</Card>
+			<Card
+				heading="Progress"
+				subheading="List"
+				style={{ width: "300px" }}
+				avatar={<Icon name="list" />}
+			>
+				<List>
+					<StandardListItem info="finished" infoState={ValueState.Success}>Activity 1</StandardListItem>
+					<StandardListItem info="failed" infoState={ValueState.Error}>Activity 2</StandardListItem>
+					<StandardListItem
+						info="in progress"
+						infoState={ValueState.Warning}
+						style={{ height: "80px" }}
+					>
+						<FlexBox direction={FlexBoxDirection.Column}>
+							<Title level={TitleLevel.H5}>Activity 3</Title>
+							<ProgressIndicator value={89} valueState={ValueState.Success} />
+						</FlexBox>
+					</StandardListItem>
+					<StandardListItem
+						info="in progress"
+						infoState={ValueState.Warning}
+						style={{ height: "80px" }}
+					>
+						<FlexBox direction={FlexBoxDirection.Column}>
+							<Title level={TitleLevel.H5}>Activity 4</Title>
+							<ProgressIndicator value={5} valueState={ValueState.Error} />
+						</FlexBox>
+					</StandardListItem>
+				</List>
 			</Card>
 		</div>
 	);
