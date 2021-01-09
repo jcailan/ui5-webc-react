@@ -12,8 +12,8 @@ import {
 	Title,
 	TitleLevel,
 	FlexBox,
-	// FlexBoxJustifyContent,
-	// FlexBoxWrap,
+	FlexBoxJustifyContent,
+	FlexBoxWrap,
 	FlexBoxDirection,
 	AnalyticalTable,
 	Icon
@@ -119,66 +119,75 @@ export function MyApp() {
 			>
 				<ShellBarItem icon="add" text="Add" />
 			</ShellBar>
-			<Card
-				avatar={<Icon name={toggleCharts === "lineChart" ? "line-chart" : "horizontal-bar-chart"} />}
-				heading="Stock Price"
-				subheading={`Click here to switch to ${switchToChart}`}
-				style={{ width: "300px" }} headerInteractive
-				onHeaderClick={handleHeaderClick}>
-				<Text style={spacing.sapUiContentPadding}>{contentTitle}</Text>
-				{toggleCharts === "lineChart" ? (
-					<LineChart
-						dimensions={[{ accessor: "month" }]}
-						measures={[{ accessor: "data", label: "Stock Price" }]}
-						dataset={dataset}
-						loading={loading}
-					/>
-				) : (
-						<BarChart
+			<FlexBox
+				justifyContent={FlexBoxJustifyContent.Center}
+				wrap={FlexBoxWrap.Wrap}
+				style={spacing.sapUiContentPadding} >
+				<Card
+					style={{ width: "300px", ...spacing.sapUiContentPadding }}
+					avatar={<Icon name={toggleCharts === "lineChart" ? "line-chart" : "horizontal-bar-chart"} />}
+					heading="Stock Price"
+					subheading={`Click here to switch to ${switchToChart}`}
+					headerInteractive
+					onHeaderClick={handleHeaderClick}>
+					<Text style={spacing.sapUiContentPadding}>{contentTitle}</Text>
+					{toggleCharts === "lineChart" ? (
+						<LineChart
 							dimensions={[{ accessor: "month" }]}
-							measures={[{ accessor: "data" }]}
+							measures={[{ accessor: "data", label: "Stock Price" }]}
 							dataset={dataset}
 							loading={loading}
 						/>
-					)}
-			</Card>
-			<Card
-				heading="Progress"
-				subheading="List"
-				style={{ width: "300px" }}
-				avatar={<Icon name="list" />}
-			>
-				<List>
-					<StandardListItem info="finished" infoState={ValueState.Success}>Activity 1</StandardListItem>
-					<StandardListItem info="failed" infoState={ValueState.Error}>Activity 2</StandardListItem>
-					<StandardListItem
-						info="in progress"
-						infoState={ValueState.Warning}
-						style={{ height: "80px" }}
-					>
-						<FlexBox direction={FlexBoxDirection.Column}>
-							<Title level={TitleLevel.H5}>Activity 3</Title>
-							<ProgressIndicator value={89} valueState={ValueState.Success} />
-						</FlexBox>
-					</StandardListItem>
-					<StandardListItem
-						info="in progress"
-						infoState={ValueState.Warning}
-						style={{ height: "80px" }}
-					>
-						<FlexBox direction={FlexBoxDirection.Column}>
-							<Title level={TitleLevel.H5}>Activity 4</Title>
-							<ProgressIndicator value={5} valueState={ValueState.Error} />
-						</FlexBox>
-					</StandardListItem>
-				</List>
-			</Card>
-			<Card heading="AnalyticalTable" style={{ maxWidth: "900px" }} avatar={<Icon name="table-view" />}>
-				<AnalyticalTable
-					data={tableData}
-					columns={tableColumns}
-					visibleRows={5} />
-			</Card>
+					) : (
+							<BarChart
+								dimensions={[{ accessor: "month" }]}
+								measures={[{ accessor: "data" }]}
+								dataset={dataset}
+								loading={loading}
+							/>
+						)}
+				</Card>
+				<Card
+					style={{ width: "300px", ...spacing.sapUiContentPadding }}
+					heading="Progress"
+					subheading="List"
+					avatar={<Icon name="list" />}
+				>
+					<List>
+						<StandardListItem info="finished" infoState={ValueState.Success}>Activity 1</StandardListItem>
+						<StandardListItem info="failed" infoState={ValueState.Error}>Activity 2</StandardListItem>
+						<StandardListItem
+							info="in progress"
+							infoState={ValueState.Warning}
+							style={{ height: "80px" }}
+						>
+							<FlexBox direction={FlexBoxDirection.Column}>
+								<Title level={TitleLevel.H5}>Activity 3</Title>
+								<ProgressIndicator value={89} valueState={ValueState.Success} />
+							</FlexBox>
+						</StandardListItem>
+						<StandardListItem
+							info="in progress"
+							infoState={ValueState.Warning}
+							style={{ height: "80px" }}
+						>
+							<FlexBox direction={FlexBoxDirection.Column}>
+								<Title level={TitleLevel.H5}>Activity 4</Title>
+								<ProgressIndicator value={5} valueState={ValueState.Error} />
+							</FlexBox>
+						</StandardListItem>
+					</List>
+				</Card>
+				<Card
+					style={{ width: "900px", ...spacing.sapUiContentPadding }}
+					heading="AnalyticalTable"
+					avatar={<Icon name="table-view" />}>
+					<AnalyticalTable
+						data={tableData}
+						columns={tableColumns}
+						visibleRows={5} />
+				</Card>
+			</FlexBox>
 		</div>
 	);
 };
