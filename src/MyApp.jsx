@@ -1,5 +1,10 @@
 import React from "react";
+import { Card } from "@ui5/webcomponents-react";
 
 export function MyApp() {
-	return <div>My root component</div>;
+	return (
+		<div>
+			<Card heading="Card"></Card>
+		</div>
+	);
 }
