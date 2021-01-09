@@ -5,23 +5,24 @@ import {
 	Text,
 	ShellBar,
 	ShellBarItem,
-	List,
-	StandardListItem,
-	ValueState,
-	ProgressIndicator,
-	Title,
-	TitleLevel,
-	FlexBox,
-	FlexBoxJustifyContent,
-	FlexBoxWrap,
-	FlexBoxDirection,
-	AnalyticalTable,
+	// List,
+	// StandardListItem,
+	// ValueState,
+	// ProgressIndicator,
+	// Title,
+	// TitleLevel,
+	// FlexBox,
+	// FlexBoxJustifyContent,
+	// FlexBoxWrap,
+	// FlexBoxDirection,
+	// AnalyticalTable,
 	Icon
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
 import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
+import "@ui5/webcomponents-icons/dist/add.js";
 
 export function MyApp() {
 	const [toggleCharts, setToggleCharts] = useState("lineChart");
@@ -79,6 +80,13 @@ export function MyApp() {
 
 	return (
 		<div>
+			<ShellBar
+				logo={<img src="/logo192.png" alt="" />}
+				profile={<Avatar image="/profile.jpeg" />}
+				primaryTitle="My App"
+			>
+				<ShellBarItem icon="add" text="Add" />
+			</ShellBar>
 			<Card
 				avatar={<Icon name={toggleCharts === "lineChart" ? "line-chart" : "horizontal-bar-chart"} />}
 				heading="Stock Price"
