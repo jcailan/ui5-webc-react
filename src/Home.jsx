@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
 	Card,
 	Text,
@@ -40,6 +41,11 @@ export function Home() {
 				setToggleCharts("lineChart");
 			}, 2000);
 		}
+	};
+
+	const history = useHistory();
+	const handleProgressHeaderClick = () => {
+		history.push("/detail");
 	};
 
 	const contentTitle = toggleCharts === 'lineChart' ? 'Line Chart' : 'Bar Chart';
@@ -139,6 +145,8 @@ export function Home() {
 				style={{ width: "300px", ...spacing.sapUiContentPadding }}
 				heading="Progress"
 				subheading="List"
+				headerInteractive
+				onHeaderClick={handleProgressHeaderClick}
 				avatar={<Icon name="list" />}
 			>
 				<List>
