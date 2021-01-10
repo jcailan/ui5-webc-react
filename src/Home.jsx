@@ -22,6 +22,7 @@ import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 import "@ui5/webcomponents-icons/dist/list.js";
 import "@ui5/webcomponents-icons/dist/table-view.js";
+import { MyCustomElement } from "./MyCustomElement";
 
 export function Home() {
 	const [toggleCharts, setToggleCharts] = useState("lineChart");
@@ -117,6 +118,7 @@ export function Home() {
 			justifyContent={FlexBoxJustifyContent.Center}
 			wrap={FlexBoxWrap.Wrap}
 			style={spacing.sapUiContentPadding} >
+			<MyCustomElement />
 			<Card
 				style={{ width: "300px", ...spacing.sapUiContentPadding }}
 				avatar={<Icon name={toggleCharts === "lineChart" ? "line-chart" : "horizontal-bar-chart"} />}
